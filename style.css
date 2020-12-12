@@ -1,5 +1,8 @@
 body {
-	background-color: steelblue;
+	background-image: url('./Blue\ Skies.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	font-family: 'Roboto', sans-serif;
 }
 .container {
 	height: 100vh;
@@ -9,19 +12,70 @@ body {
 
 .card {
 	width: 500px;
+	height: 800px;
 	margin: 50px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	background-color: white;
+	border-radius: 1rem;
 }
 
 .header {
 	text-align: center;
+	width: 500px;
+}
+h1 {
+	background-color: steelblue;
+	display: flex;
+	margin: 0;
+	height: 60px;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	font-weight: 400;
+	border-top-left-radius: 1rem;
+	border-top-right-radius: 1rem;
+}
+
+h2 {
+	/* text-align: start; */
+	align-self: start;
+	margin-left: 100px;
+	margin-top: 0px;
+	margin-bottom: 5px;
+	font-weight: 400;
+}
+
+.form {
+	/* padding: 10px 120px; */
+	padding-top: 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+#newTodo {
+	padding: 12px 20px;
+	width: 300px;
+	height: 60px;
+	padding-right: 60px;
+	box-sizing: border-box;
+	/* font-size: 25px; */
+}
+
+#newTodo:focus {
+	outline: none;
+}
+
+#add-btn {
+	margin-left: -60px;
+	height: 60px;
+	width: 60px;
 }
 
 .item-list {
 	width: 300px;
+	padding-top: 20px;
 }
 
 ul {
@@ -32,10 +86,24 @@ ul {
 li {
 	display: flex;
 	padding: 5px 0px;
+	align-items: center;
 }
 
 li > span {
-	margin-left: 5px;
+	margin-left: 10px;
+	font-size: 25px;
+}
+
+.uncheck {
+	color: #e0e0e0;
+}
+
+.uncheck:hover {
+	color: #d8d8d8;
+}
+
+.check {
+	color: steelblue;
 }
 
 .delete-btn {
