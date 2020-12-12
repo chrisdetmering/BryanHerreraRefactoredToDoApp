@@ -1,7 +1,8 @@
 let todoList = [];
 let ul = document.getElementById('list');
-let uncheckBtn = 'fas fa-circle fa-lg uncheck';
-let checkBtn = 'fas fa-check-circle fa-lg check';
+let uncheckBtn = 'fas fa-square fa-lg uncheck';
+let checkBtn = 'fas fa-check-square fa-lg check';
+let deleteBtn = 'fas fa-times-circle delete-btn fa-lg';
 
 function validateInput() {
 	let newTodo = document.getElementById('newTodo').value;
@@ -20,7 +21,7 @@ function createListElement(todo) {
 	let span = document.createElement('span');
 	span.appendChild(document.createTextNode(todo));
 	let deleteButton = document.createElement('i');
-	deleteButton.className = 'fas fa-times-circle delete-btn fa-lg';
+	deleteButton.className = deleteBtn;
 	deleteButton.style.visibility = 'hidden';
 	deleteButton.addEventListener('click', todoDelete);
 	let checkDone = document.createElement('i');
@@ -43,16 +44,12 @@ function todoCheck() {
 		console.log(this);
 		this.nextElementSibling.className = 'strike';
 		this.setAttribute('data-done', 'true');
-		//this.classList.remove('far');
-		//this.classList.remove('fa-circle');
 		this.className = checkBtn;
 		this.nextElementSibling.nextElementSibling.style.visibility = 'visible';
 	} else {
 		console.log('not done');
 		this.nextElementSibling.classList.remove('strike');
 		this.setAttribute('data-done', 'false');
-		//this.classList.remove('fas');
-		//this.classList.remove('fa-check-circle');
 		this.className = uncheckBtn;
 		this.nextElementSibling.nextElementSibling.style.visibility = 'hidden';
 	}
