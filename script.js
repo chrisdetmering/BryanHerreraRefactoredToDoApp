@@ -39,7 +39,7 @@ function validateInput() {
 		document.getElementById('newTodo').value = null;
 		return false;
 	} else {
-		createListElement(newTodo);
+		createListElement(newTodo.toLowerCase());
 		document.getElementById('newTodo').value = null;
 	}
 }
@@ -48,7 +48,7 @@ function createListElement(todo, checkStatus = 'uncheckBtn') {
 	ul = document.getElementById('list');
 	let li = document.createElement('li');
 	let span = document.createElement('span');
-	span.appendChild(document.createTextNode(todo));
+	span.appendChild(document.createTextNode(todo.toLowerCase()));
 	let deleteButton = document.createElement('i');
 	deleteButton.className = deleteBtn;
 	deleteButton.style.visibility = 'hidden';
