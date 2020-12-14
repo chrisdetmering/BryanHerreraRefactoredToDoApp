@@ -8,7 +8,6 @@ let listValues = [];
 let listDataArr = Object.values(storedList);
 let clearButton = document.getElementsByClassName('clear-btn')[0];
 renderClearButton();
-//console.log(clearButton);
 
 function loadStoredElements() {
 	if (storedList.length != 0) {
