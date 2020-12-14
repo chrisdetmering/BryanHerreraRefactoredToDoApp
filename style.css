@@ -96,6 +96,24 @@ h2 {
 	outline: 0;
 }
 
+.clear-btn {
+	background-color: white; /* Green */
+	border: 1px #f44336 solid;
+	color: #f44336;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin-bottom: 20px;
+	margin-top: auto;
+	cursor: pointer;
+}
+
+.clear-btn:focus {
+	outline: 0;
+}
+
 .item-list {
 	width: 300px;
 	height: 100%;

@@ -6,6 +6,9 @@ let storedList = window.localStorage;
 let listKeys = Object.keys(storedList).sort();
 let listValues = [];
 let listDataArr = Object.values(storedList);
+let clearButton = document.getElementsByClassName('clear-btn')[0];
+renderClearButton();
+//console.log(clearButton);
 
 function loadStoredElements() {
 	if (storedList.length != 0) {
@@ -20,13 +23,10 @@ function loadStoredElements() {
 			console.log(JSON.parse(storedList[listKeys[i]])[0]);
 			createListElement(JSON.parse(storedList[listKeys[i]])[0], JSON.parse(storedList[listKeys[i]])[1]);
 		}
+		renderClearButton();
 	} else {
 		console.log('No stored list items');
 	}
-}
-
-function renderList(listItem) {
-	ul.innerHTML += listItem;
 }
 
 function validateInput() {
@@ -77,6 +77,7 @@ function createListElement(todo, checkStatus = 'uncheckBtn') {
 
 function storeListItem(listItem) {
 	storedList.setItem(storedList.length, JSON.stringify([ listItem, 'uncheckBtn' ]));
+	renderClearButton();
 	listDataArr = Object.values(storedList);
 	listValues.push(JSON.parse(storedList.getItem(storedList.length - 1))[0]);
 	console.log(storedList);
@@ -117,6 +118,21 @@ function todoDelete() {
 	storedList.removeItem(
 		Object.keys(storedList).find((key) => JSON.parse(storedList[key])[0] === this.previousElementSibling.innerHTML)
 	);
+	renderClearButton();
+}
+
+function clearList() {
+	storedList.clear();
+	ul.innerHTML = '';
+	renderClearButton();
+}
+
+function renderClearButton() {
+	if (storedList.length > 0) {
+		clearButton.style.visibility = 'visible';
+	} else {
+		clearButton.style.visibility = 'hidden';
+	}
 }
 
 loadStoredElements();
