@@ -89,6 +89,11 @@ h2 {
 	text-decoration: none;
 	display: inline-block;
 	cursor: pointer;
+	border-radius: 0;
+}
+
+#add-btn:focus {
+	outline: 0;
 }
 
 .item-list {
