@@ -1,4 +1,8 @@
 let ul = document.getElementById('list');
+let li = document.createElement('li');
+let span = document.createElement('span');
+let deleteButton = document.createElement('i');
+let checkDone = document.createElement('i');
 let uncheckBtn = 'fas fa-square fa-lg uncheck';
 let checkBtn = 'fas fa-check-square fa-lg check';
 let deleteBtn = 'fas fa-times-circle delete-btn fa-lg';
@@ -7,7 +11,6 @@ let listKeys = Object.keys(storedList).sort();
 let listValues = [];
 let listDataArr = Object.values(storedList);
 let clearButton = document.getElementsByClassName('clear-btn')[0];
-renderClearButton();
 
 function loadStoredElements() {
 	if (storedList.length != 0) {
@@ -45,14 +48,14 @@ function validateInput() {
 
 function createListElement(todo, checkStatus = 'uncheckBtn') {
 	ul = document.getElementById('list');
-	let li = document.createElement('li');
-	let span = document.createElement('span');
+	li = document.createElement('li');
+	span = document.createElement('span');
 	span.appendChild(document.createTextNode(todo.toLowerCase()));
-	let deleteButton = document.createElement('i');
+	deleteButton = document.createElement('i');
 	deleteButton.className = deleteBtn;
 	deleteButton.style.visibility = 'hidden';
 	deleteButton.addEventListener('click', todoDelete);
-	let checkDone = document.createElement('i');
+	checkDone = document.createElement('i');
 	checkDone.addEventListener('click', todoCheck);
 	li.appendChild(checkDone);
 	li.appendChild(span);
@@ -75,10 +78,21 @@ function createListElement(todo, checkStatus = 'uncheckBtn') {
 }
 
 function storeListItem(listItem) {
-	storedList.setItem(storedList.length, JSON.stringify([ listItem, 'uncheckBtn' ]));
+	listKeys = Object.keys(storedList).sort();
+	console.log(listKeys);
+	if (listKeys.length === 0) {
+		storedList.setItem(storedList.length, JSON.stringify([ listItem, 'uncheckBtn' ]));
+		listKeys = Object.keys(storedList).sort();
+	} else {
+		listKeys = Object.keys(storedList).sort();
+		console.log(listKeys[listKeys.length - 1]);
+		storedList.setItem(parseInt(listKeys[listKeys.length - 1]) + 1, JSON.stringify([ listItem, 'uncheckBtn' ]));
+	}
+	//storedList.setItem(storedList.length + 1, JSON.stringify([ listItem, 'uncheckBtn' ]));
 	renderClearButton();
 	listDataArr = Object.values(storedList);
-	listValues.push(JSON.parse(storedList.getItem(storedList.length - 1))[0]);
+	console.log(JSON.parse(storedList.getItem(listKeys[listKeys.length - 1]))[0]);
+	listValues.push(JSON.parse(storedList.getItem(listKeys[listKeys.length - 1]))[0]);
 	console.log(storedList);
 	console.log(listDataArr);
 	console.log(listValues);
@@ -117,6 +131,7 @@ function todoDelete() {
 	storedList.removeItem(
 		Object.keys(storedList).find((key) => JSON.parse(storedList[key])[0] === this.previousElementSibling.innerHTML)
 	);
+	listValues.splice(listValues.indexOf(this.previousElementSibling.innerHTML), 1);
 	renderClearButton();
 }
 
@@ -135,3 +150,4 @@ function renderClearButton() {
 }
 
 loadStoredElements();
+renderClearButton();
