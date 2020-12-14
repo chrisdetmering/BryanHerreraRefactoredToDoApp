@@ -97,7 +97,7 @@ h2 {
 	outline: 0;
 }
 
-.clear-btn {
+#clear-btn {
 	background-color: white; /* Green */
 	border: 1px #f44336 solid;
 	color: #f44336;
@@ -111,7 +111,7 @@ h2 {
 	cursor: pointer;
 }
 
-.clear-btn:focus {
+#clear-btn:focus {
 	outline: 0;
 }
 
@@ -145,6 +145,7 @@ li > span {
 
 .uncheck {
 	color: #e0e0e0;
+	cursor: pointer;
 }
 
 .uncheck:hover {
@@ -153,6 +154,7 @@ li > span {
 
 .check {
 	color: steelblue;
+	cursor: pointer;
 }
 
 .delete-btn {

@@ -10,24 +10,17 @@ let storedList = window.localStorage;
 let listKeys = Object.keys(storedList).sort();
 let listValues = [];
 let listDataArr = Object.values(storedList);
-let clearButton = document.getElementsByClassName('clear-btn')[0];
+let clearButton = document.getElementById('clear-btn');
 
 function loadStoredElements() {
 	if (storedList.length != 0) {
-		console.log('Loading saved list items');
 		for (let i = 0; i < storedList.length; i++) {
 			listValues.push(JSON.parse(storedList[listKeys[i]])[0]);
 		}
-		console.log(listValues);
 		for (let i = 0; i < storedList.length; i++) {
-			console.log(listDataArr);
-			console.log(JSON.parse(storedList[listKeys[i]]));
-			console.log(JSON.parse(storedList[listKeys[i]])[0]);
 			createListElement(JSON.parse(storedList[listKeys[i]])[0], JSON.parse(storedList[listKeys[i]])[1]);
 		}
 		renderClearButton();
-	} else {
-		console.log('No stored list items');
 	}
 }
 
@@ -72,39 +65,31 @@ function createListElement(todo, checkStatus = 'uncheckBtn') {
 	}
 
 	if (!listValues.includes(todo.toLowerCase())) {
-		console.log('Store me Im new');
 		storeListItem(todo);
 	}
 }
 
 function storeListItem(listItem) {
 	listKeys = Object.keys(storedList).sort();
-	console.log(listKeys);
 	if (listKeys.length === 0) {
 		storedList.setItem(storedList.length, JSON.stringify([ listItem, 'uncheckBtn' ]));
 		listKeys = Object.keys(storedList).sort();
+		listDataArr = Object.values(storedList);
+		listValues.push(JSON.parse(storedList.getItem(listKeys[listKeys.length - 1]))[0]);
+		renderClearButton();
 	} else {
-		listKeys = Object.keys(storedList).sort();
-		console.log(listKeys[listKeys.length - 1]);
 		storedList.setItem(parseInt(listKeys[listKeys.length - 1]) + 1, JSON.stringify([ listItem, 'uncheckBtn' ]));
+		listKeys = Object.keys(storedList).sort();
+		listDataArr = Object.values(storedList);
+		listValues.push(JSON.parse(storedList.getItem(listKeys[listKeys.length - 1]))[0]);
+		renderClearButton();
 	}
-	//storedList.setItem(storedList.length + 1, JSON.stringify([ listItem, 'uncheckBtn' ]));
-	renderClearButton();
-	listDataArr = Object.values(storedList);
-	console.log(JSON.parse(storedList.getItem(listKeys[listKeys.length - 1]))[0]);
-	listValues.push(JSON.parse(storedList.getItem(listKeys[listKeys.length - 1]))[0]);
-	console.log(storedList);
-	console.log(listDataArr);
-	console.log(listValues);
 }
 
 function todoCheck() {
 	let isDone = this.getAttribute('data-done') === 'false' ? false : true;
-	console.log(isDone);
 	isDone = !isDone;
-	console.log(isDone);
 	if (isDone) {
-		console.log(' done');
 		this.nextElementSibling.className = 'strike';
 		this.setAttribute('data-done', 'true');
 		this.className = checkBtn;
@@ -113,7 +98,6 @@ function todoCheck() {
 			Object.keys(storedList).find((key) => JSON.parse(storedList[key])[0] === this.nextElementSibling.innerHTML)
 		] = JSON.stringify([ this.nextElementSibling.innerHTML, 'checkBtn' ]);
 	} else {
-		console.log('not done');
 		this.nextElementSibling.classList.remove('strike');
 		this.setAttribute('data-done', 'false');
 		this.className = uncheckBtn;
@@ -125,13 +109,13 @@ function todoCheck() {
 }
 
 function todoDelete() {
-	console.log(' delete');
-	console.log(this.previousElementSibling.innerHTML);
 	this.parentNode.remove();
-	storedList.removeItem(
-		Object.keys(storedList).find((key) => JSON.parse(storedList[key])[0] === this.previousElementSibling.innerHTML)
+	let deleteKey = Object.keys(storedList).find(
+		(key) => JSON.parse(storedList[key])[0] === this.previousElementSibling.innerHTML
 	);
+	storedList.removeItem(deleteKey);
 	listValues.splice(listValues.indexOf(this.previousElementSibling.innerHTML), 1);
+	listKeys.splice(deleteKey, 1);
 	renderClearButton();
 }
 
