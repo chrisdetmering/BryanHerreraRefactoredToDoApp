@@ -122,6 +122,8 @@ function todoDelete() {
 function clearList() {
 	storedList.clear();
 	ul.innerHTML = '';
+	listKeys = Object.keys(storedList).sort();
+	listValues = [];
 	renderClearButton();
 }
 
