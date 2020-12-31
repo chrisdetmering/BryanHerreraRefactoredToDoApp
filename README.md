@@ -15,17 +15,3 @@ I used Javascript, HTML, and CSS to create a to do list app. You can add multipl
 * **Bryan Herrera** - *Full-Stack Developer* - Website | [LinkedIn](https://www.linkedin.com/in/herrerabryan/)  
 
 
-
-
-
-
-
-#BEFORE WE START 
-1) 100% Focus
-2) Ask questions 
-3) Re-watch 
-
-#MAIN FOCUS 
-1) DRY
-2) SRP
-3) NAMING 
